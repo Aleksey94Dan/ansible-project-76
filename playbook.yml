@@ -14,3 +14,17 @@
 
   roles:
     - geerlingguy.pip
+    - geerlingguy.docker
+
+  tasks:
+    - name: Pull image of "Redmine"
+      community.docker.docker_image:
+        name: redmine
+        source: pull
+        tag: latest
+      tags: redmine
+
+    # - name: Run "Redmine"
+    #   community.docker.docker_container:
+    #     name: some-redime
+    #     image: redmine
