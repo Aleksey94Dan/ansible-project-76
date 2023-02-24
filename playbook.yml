@@ -3,10 +3,6 @@
   gather_facts: true
   become: true
 
-  # vars:
-  #   pip_install_packages:
-  #     - name: docker
-
   pre_tasks:
     - name: Update cache
       ansible.builtin.apt:
@@ -26,8 +22,8 @@
 
     - name: Copy env_file to container
       ansible.builtin.template:
-        src: teplates/.env.j2
-        dest: /vat/tmp/redmine/.env_redmine
+        src: templates/.env.j2
+        dest: /var/tmp/.env_redmine
 
     - name: Run "Redmine"
       community.docker.docker_container:
@@ -36,5 +32,5 @@
         state: started
         ports:
           - "8000:3000"
-        env_file: /vat/tmp/redmine/.env_redmine
+        env_file: /var/tmp/.env_redmine
       tags: redmine

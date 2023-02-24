@@ -1,0 +1,10 @@
+pip_install_packages:
+  - name: docker
+docker_users:
+  - aleksey
+
+redmine_db_host: "{{ vault_redmine_db_host}}"
+redmine_db_username: "{{ vault_redmine_db_username}}"
+redmine_db_postgres: "{{ vault_redmine_db_postgres }}"
+redmine_db_password: "{{ vault_redmine_db_password }}"
+redmine_db_port: "{{  valut_redmine_db_port }}"
