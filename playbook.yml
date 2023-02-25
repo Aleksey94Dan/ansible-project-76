@@ -5,7 +5,6 @@
     - name: Update cache
       ansible.builtin.apt:
         update_cache: yes
-      become: true
       tags: prepare
 
   roles:
@@ -18,7 +17,6 @@
         src: templates/.env.j2
         dest: /var/tmp/.env_redmine
       tags: redmine
-      become: true
 
     - name: Run "Redmine"
       community.docker.docker_container:
@@ -29,12 +27,10 @@
           - "{{ app_port }}:3000"
         env_file: /var/tmp/.env_redmine
       tags: redmine
-      become: true
 
 - hosts: webservers
-  become: true
   tasks:
-
+  
     - name: Install datadog
       ansible.builtin.import_role:
         name: datadog.datadog
