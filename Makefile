@@ -4,7 +4,7 @@ ping:
 install-requirements:
 	ansible-galaxy install -r requirements.yml
 
-install-packages:
+expand:
 	ansible-playbook -i inventory.ini --ask-vault-pass playbook.yml
 
 run_redmine:
