@@ -9,7 +9,7 @@
 
   roles:
     - geerlingguy.pip
-    - geerlingguy.docker
+    # - geerlingguy.docker
 
   tasks:
     - name: Copy env_file to container
