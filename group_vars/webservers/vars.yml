@@ -1,11 +1,10 @@
 docker_install_compose: true
-docker_compose_version: "1.26.0"
 docker_compose_arch: "{{ ansible_architecture }}"
 docker_compose_path: /usr/local/bin/docker-compose
 pip_install_packages:
   - name: docker
-# docker_users:
-#   - aleksey
+docker_users:
+  - "{{ ansible_user }}"
 
 app_port: 8000
 
