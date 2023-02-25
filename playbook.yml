@@ -7,6 +7,7 @@
     - name: Update cache
       ansible.builtin.apt:
         update_cache: yes
+      tags: prepare
 
   roles:
     - geerlingguy.pip
@@ -24,13 +25,28 @@
       ansible.builtin.template:
         src: templates/.env.j2
         dest: /var/tmp/.env_redmine
+      tags: redmine
 
     - name: Run "Redmine"
       community.docker.docker_container:
         name: some-redime
         image: redmine
         state: started
+        restart_policy: unless-stopped
         ports:
           - "8000:3000"
         env_file: /var/tmp/.env_redmine
       tags: redmine
+
+    - name: Install datadog
+      ansible.builtin.import_role:
+        name: datadog.datadog
+      tags: datadog
+
+    - name: Copy http_check to datadog
+      ansible.builtin.template:
+        src: templates/http_check.d/conf.yml.j2
+        dest: /etc/datadog-agent/conf.d/http_check.d/redmine.yaml
+        owner: "{{ datadog_user }}"
+        group: "{{ datadog_group }}"
+      tags: datadog

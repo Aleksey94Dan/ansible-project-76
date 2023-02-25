@@ -1,0 +1,7 @@
+init_config:
+  timeout: 5
+
+instances:
+  - name: {{ server_name }}
+    url: http://{{ ansible_host }}:{{ app_port }}/
+    method: get

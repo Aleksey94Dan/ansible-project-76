@@ -3,8 +3,17 @@ pip_install_packages:
 docker_users:
   - aleksey
 
+app_port: 8000
+
 redmine_db_host: "{{ vault_redmine_db_host}}"
 redmine_db_username: "{{ vault_redmine_db_username}}"
 redmine_db_postgres: "{{ vault_redmine_db_postgres }}"
 redmine_db_password: "{{ vault_redmine_db_password }}"
-redmine_db_port: "{{  valut_redmine_db_port }}"
+redmine_db_port: "{{ vault_redmine_db_port }}"
+
+datadog_api_key: "{{ vault_datadog_api_key }}"
+datadog_site: "us5.datadoghq.com"
+datadog_config:
+  logs_enabled: true
+  process_config:
+    enabled: "true"
