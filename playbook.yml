@@ -13,14 +13,6 @@
     - geerlingguy.docker
 
   tasks:
-    - name: Pull image of "Redmine"
-      community.docker.docker_image:
-        name: redmine
-        source: pull
-        tag: latest
-      tags: redmine
-      become: true
-
     - name: Copy env_file to container
       ansible.builtin.template:
         src: templates/.env.j2
@@ -32,7 +24,6 @@
       community.docker.docker_container:
         name: some-redime
         image: redmine
-        state: started
         restart_policy: unless-stopped
         ports:
           - "{{ app_port }}:3000"
