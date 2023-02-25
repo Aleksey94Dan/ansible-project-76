@@ -1,11 +1,11 @@
 ---
 - hosts: all
-  become: true
 
   pre_tasks:
     - name: Update cache
       ansible.builtin.apt:
         update_cache: yes
+      become: true
       tags: prepare
 
   roles:
@@ -19,12 +19,14 @@
         source: pull
         tag: latest
       tags: redmine
+      become: true
 
     - name: Copy env_file to container
       ansible.builtin.template:
         src: templates/.env.j2
         dest: /var/tmp/.env_redmine
       tags: redmine
+      become: true
 
     - name: Run "Redmine"
       community.docker.docker_container:
@@ -36,6 +38,7 @@
           - "{{ app_port }}:3000"
         env_file: /var/tmp/.env_redmine
       tags: redmine
+      become: true
 
 - hosts: webservers
   become: true
