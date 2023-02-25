@@ -1,6 +1,5 @@
 ---
 - hosts: all
-  gather_facts: true
   become: true
 
   pre_tasks:
@@ -34,9 +33,13 @@
         state: started
         restart_policy: unless-stopped
         ports:
-          - "8000:3000"
+          - "{{ app_port }}:3000"
         env_file: /var/tmp/.env_redmine
       tags: redmine
+
+- hosts: webservers
+  become: true
+  tasks:
 
     - name: Install datadog
       ansible.builtin.import_role:
