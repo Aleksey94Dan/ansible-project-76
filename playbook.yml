@@ -8,6 +8,12 @@
       ansible.builtin.apt:
         update_cache: yes
       tags: prepare
+    
+    - name: Print service facts
+      ansible.builtin.debug:
+        var: ansible_facts.services
+
+
 
   roles:
     - geerlingguy.pip
