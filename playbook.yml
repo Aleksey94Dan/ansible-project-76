@@ -1,5 +1,7 @@
 ---
-- hosts: all
+- name: Prepare servers
+  hosts: all
+  become: true
 
   pre_tasks:
     - name: Update cache
@@ -9,7 +11,10 @@
 
   roles:
     - geerlingguy.pip
+    - geerlingguy.docker
 
+- name: Install Redmine
+  hosts: webservers
   tasks:
     - name: Copy env_file to container
       ansible.builtin.template:
@@ -27,9 +32,10 @@
         env_file: /var/tmp/.env_redmine
       tags: redmine
 
-- hosts: webservers
+- name: Install Datadog
+  hosts: webservers
+  become: true
   tasks:
-
     - name: Install datadog
       ansible.builtin.import_role:
         name: datadog.datadog
