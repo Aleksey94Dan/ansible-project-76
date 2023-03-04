@@ -1,7 +1,6 @@
 pip_install_packages:
   - name: docker
-# docker_users:
-#   - "{{ ansible_user }}"
-docker_install_compose_plugin: true
+docker_users:
+  - "{{ ansible_user }}"
 app_port: 8000
 
