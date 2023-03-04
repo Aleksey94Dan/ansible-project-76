@@ -15,7 +15,6 @@
 
 - name: Install Redmine
   hosts: webservers
-  become: true
   tasks:
     - name: Copy env_file to container
       ansible.builtin.template:
