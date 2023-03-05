@@ -19,7 +19,7 @@
 
     - name: Install docker if it doesn't have in system
       ansible.builtin.debug:
-        var: result.api_version
+        var: result.docker_api_version
     # - geerlingguy.docker
 
 - name: Install Redmine
