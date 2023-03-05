@@ -13,11 +13,10 @@
     - geerlingguy.pip
 
   tasks:
-    - name: Get info on docker host
-      ansible.builtin.setup:
-        gather_subset:
-          - system
-    # - geerlingguy.docker
+    - name: Install docker
+      ansible.builtin.import_role:
+        name: geerlingguy.docker
+      when: "{{ install_docker }}"
 
 - name: Install Redmine
   hosts: webservers
@@ -26,6 +25,7 @@
       ansible.builtin.template:
         src: templates/.env.j2
         dest: /var/tmp/.env_redmine
+        mode: 0644
       tags: redmine
 
     - name: Run "Redmine"
@@ -35,7 +35,7 @@
         restart_policy: unless-stopped
         ports:
           - "{{ app_port }}:3000"
-        env_file: /var/tmp/.env_redmine
+        env_file: /var/tmp/.env_redmine6
       tags: redmine
 
 - name: Install Datadog
@@ -53,4 +53,5 @@
         dest: /etc/datadog-agent/conf.d/http_check.d/redmine.yaml
         owner: "{{ datadog_user }}"
         group: "{{ datadog_group }}"
+        mode: 0644
       tags: datadog
