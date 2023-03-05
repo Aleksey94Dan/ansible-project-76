@@ -14,12 +14,12 @@
 
   tasks:
     - name: Get info on docker host
-      community.docker.docker_host_info:
+      community.docker.api_version:
       register: result
 
     - name: Install docker if it doesn't have in system
       ansible.builtin.debug:
-        var: result.host_info
+        var: result
     # - geerlingguy.docker
 
 - name: Install Redmine
