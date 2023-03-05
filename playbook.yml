@@ -12,11 +12,12 @@
   roles:
     - geerlingguy.pip
 
-  # tasks:
-  #   - name: Install docker
-  #     ansible.builtin.import_role:
-  #       name: geerlingguy.docker
-  #     when: install_docker is true
+  tasks:
+    - name: Install docker
+      ansible.builtin.import_role:
+        name: geerlingguy.docker
+      when: install_docker is true
+      tags: prepare_docker
 
 - name: Install Redmine
   hosts: webservers
