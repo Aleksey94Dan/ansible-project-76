@@ -1,7 +1,7 @@
 pip_install_packages:
   - name: docker
-install_docker: false
-docker_users:
-  - "{{ ansible_user }}"
+# install_docker: false
+# docker_users:
+#   - "{{ ansible_user }}"
 app_port: 8000
 
