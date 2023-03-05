@@ -35,7 +35,7 @@
         restart_policy: unless-stopped
         ports:
           - "{{ app_port }}:3000"
-        env_file: /var/tmp/.env_redmine6
+        env_file: /var/tmp/.env_redmine
       tags: redmine
 
 - name: Install Datadog
